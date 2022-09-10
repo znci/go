@@ -70,10 +70,7 @@ app.post("/api/tryAdmin", (req, res) => {
 	if(username === "AAAAAAAAAADMINNNNN" && password === "porgammering") {
 		res.status(200).send("yous di it!"); console.log("yees");
 	}
-}) 
-app.get("*", (req, res) => { 
-	console.log("insert 404 page");
-})
+});
 server.listen(() => {
 	console.log(`——————————znci—————————`);
 	console.log(chalk.cyanBright(`Server Opened`));
