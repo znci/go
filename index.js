@@ -20,7 +20,6 @@ const express = require("express"),
 	  sqlite3 = require('sqlite3'),
 	  db = new sqlite3.Database('main.sqlite3'),
 	  shortid = require('shortid'),
-	  ngrok = require('ngrok')
 	  chalk = require("chalk")
 
 db.serialize(() => {
@@ -78,14 +77,8 @@ app.get("*", (req, res) => {
 })
 var localhost = `http://localhost:${PORT}`
 server.listen(PORT, () => {
-	async function startNgrok() {
-		const url = await ngrok.connect({proto: 'tcp', addr: PORT}); // tcp protocol purely for the reason of NOT leaking your ip
-		console.log(chalk.cyanBright(`Started ngrok @ ${url} @ http://${url.substring(6)}`));
-	};
 	console.log(`——————————znci—————————`);
 	console.log(chalk.cyanBright(`Server Opened on PORT ${PORT}`));
 	console.log(chalk.cyanBright(`API Listening @ ${localhost}/api/`));
-	console.log(chalk.blueBright(`Starting ngrok`));
-	startNgrok()
 	console.log(`———————————go——————————`);
 })
