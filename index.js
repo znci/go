@@ -19,11 +19,11 @@ const express = require("express"),
 	  sqlite3 = require('sqlite3'),
 	  db = new sqlite3.Database('main.sqlite3'),
 	  shortid = require('shortid'),
-	  chalk = require("chalk")
+
+	  SERVERPORT = 25565;
 
 db.serialize(() => {
-	db.run("CREATE TABLE IF NOT EXISTS shortUrls (shortId TEXT, redirectUrl TEXT)")
-	console.log('a')
+	db.run("CREATE TABLE IF NOT EXISTS shortUrls (shortId TEXT, redirectUrl TEXT, time INT, ip TEXT)")
 }); 
 
 function insert(shortID, redirectUrl) {
@@ -39,16 +39,13 @@ app.use(express.static(path.join(__dirname + "/public")));
 
 app.get("/:id?", (req, res) => {
 	const { id } = req.params;
+	console.log(req.connection.remoteAddress);
 	if(id) {
 		db.get(`SELECT * FROM shortUrls WHERE shortId = "${id}"`, function (err,val) {
 			if(val) res.redirect(val.redirectUrl)
 		})
 	}
 });
-	
-app.post("/api/:request", (req, res) => {
-	const r = req.params;
-})
 app.post("/api/create", (req, res) => {
 	const redirectURL = req.body.redirectURL
 	const randomId = shortid.generate() 
@@ -71,9 +68,10 @@ app.post("/api/tryAdmin", (req, res) => {
 		res.status(200).send("yous di it!"); console.log("yees");
 	}
 });
-server.listen(() => {
+server.listen(SERVERPORT, () => {
+    console.log('a')
 	console.log(`——————————znci—————————`);
-	console.log(chalk.cyanBright(`Server Opened`));
-	console.log(chalk.cyanBright(`API Listening`));
+	console.log(`Server Opened`);
+	console.log(`API Listening`);
 	console.log(`———————————go——————————`);
 })
