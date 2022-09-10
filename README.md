@@ -18,4 +18,3 @@
  - body-parser - managing post requests for api
  - sqlite3 - local database (WILL BE REMOVED IN DEVSETUP LATER)
  - shortid - generating random id because we're lazy
- - chalk - cOlOrFuL tErMiNaL
