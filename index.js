@@ -14,7 +14,6 @@ const express = require("express"),
 	  http = require("http"),
 	  path = require("path"),
 	  bodyParser = require('body-parser'),
-	  PORT = 9197,
 	  app = express(),
 	  server = http.createServer(app),
 	  sqlite3 = require('sqlite3'),
@@ -75,10 +74,9 @@ app.post("/api/tryAdmin", (req, res) => {
 app.get("*", (req, res) => { 
 	console.log("insert 404 page");
 })
-var localhost = `http://localhost:${PORT}`
 server.listen(PORT, () => {
 	console.log(`——————————znci—————————`);
-	console.log(chalk.cyanBright(`Server Opened on PORT ${PORT}`));
-	console.log(chalk.cyanBright(`API Listening @ ${localhost}/api/`));
+	console.log(chalk.cyanBright(`Server Opened`));
+	console.log(chalk.cyanBright(`API Listening`));
 	console.log(`———————————go——————————`);
 })
