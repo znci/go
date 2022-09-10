@@ -74,7 +74,7 @@ app.post("/api/tryAdmin", (req, res) => {
 app.get("*", (req, res) => { 
 	console.log("insert 404 page");
 })
-server.listen(PORT, () => {
+server.listen(() => {
 	console.log(`——————————znci—————————`);
 	console.log(chalk.cyanBright(`Server Opened`));
 	console.log(chalk.cyanBright(`API Listening`));
