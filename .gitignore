@@ -1,0 +1,7 @@
+.env
+node_modules/
+main.sqlite3
+ngrok.exe
+firebaseconfig.js
+firebase.json
+firebase-secrets.json

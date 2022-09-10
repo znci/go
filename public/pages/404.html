@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>404</title>
+	<link rel="stylesheet" href="../css/index.css" defer>
+</head>
+<body>
+	<style>
+		html {
+			overflow: hidden;
+			font-family: "Manrope", sans-serif;
+			font-weight: 900;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position: absolute;
+			user-select: none;
+		}
+		h1 {
+			position: absolute;
+			margin-left: 300px;
+			margin-top: 200px;
+			background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff);
+			-webkit-background-clip: text;
+			background-clip: text;
+			color: transparent;
+			animation: rainbowshift 3s ease-in-out infinite;
+			background-size: 400% 100%;
+			font-size: 25rem;
+		}
+		@keyframes rainbowshift {
+			0%, 100% {background-position: 0 0;}
+			50% {background-position: 100% 0;}
+		}
+		.glow img {
+			height: 1200px;
+			margin: 10px;
+			opacity: 0.25;
+			padding: 200px;
+			position: absolute;
+		}
+		a.home {
+			display: block;
+			margin: 300px 400px;
+			position: absolute;
+			font-size: 2rem;
+			color: #fff;
+			text-decoration: none!important;
+			z-index: 10!important;
+			transition: color 0.3s linear;
+		}
+		a.home:hover {
+			color: #ff3399;
+		}
+	</style>
+	<h1>404</h1>
+	<div class="glow"><img src="../svg/cloud.svg" alt=""></div>
+	<a href="../" class="home">Home</a>
+</body>
+</html>
