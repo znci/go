@@ -18,9 +18,13 @@ const express = require("express"),
 	  server = http.createServer(app),
 	  sqlite3 = require('sqlite3'),
 	  db = new sqlite3.Database('main.sqlite3'),
+<<<<<<< HEAD
 	  shortid = require('shortid'),
 
 	  SERVERPORT = 25565;
+=======
+	  shortid = require('shortid')
+>>>>>>> 3bc130a6772a9e78cf1585fdd31a21b7f975f02b
 
 db.serialize(() => {
 	db.run("CREATE TABLE IF NOT EXISTS shortUrls (shortId TEXT, redirectUrl TEXT, time INT, ip TEXT)")
@@ -68,8 +72,13 @@ app.post("/api/tryAdmin", (req, res) => {
 		res.status(200).send("yous di it!"); console.log("yees");
 	}
 });
+<<<<<<< HEAD
 server.listen(SERVERPORT, () => {
     console.log('a')
+=======
+server.listen(() => {
+	console.log(`a`)
+>>>>>>> 3bc130a6772a9e78cf1585fdd31a21b7f975f02b
 	console.log(`——————————znci—————————`);
 	console.log(`Server Opened`);
 	console.log(`API Listening`);
