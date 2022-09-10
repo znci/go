@@ -71,8 +71,9 @@ app.post("/api/tryAdmin", (req, res) => {
 	}
 });
 server.listen(() => {
+	console.log(`a`)
 	console.log(`——————————znci—————————`);
-	console.log(chalk.cyanBright(`Server Opened`));
-	console.log(chalk.cyanBright(`API Listening`));
+	console.log(`Server Opened`);
+	console.log(`API Listening`);
 	console.log(`———————————go——————————`);
 })
