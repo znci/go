@@ -18,8 +18,7 @@ const express = require("express"),
 	  server = http.createServer(app),
 	  sqlite3 = require('sqlite3'),
 	  db = new sqlite3.Database('main.sqlite3'),
-	  shortid = require('shortid'),
-	  chalk = require("chalk")
+	  shortid = require('shortid')
 
 db.serialize(() => {
 	db.run("CREATE TABLE IF NOT EXISTS shortUrls (shortId TEXT, redirectUrl TEXT)")
