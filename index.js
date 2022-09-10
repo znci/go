@@ -39,7 +39,7 @@ app.use(express.static(path.join(__dirname + "/public")));
 
 app.get("/:id?", (req, res) => {
 	const { id } = req.params;
-	console.log(req.connection.remoteAddress);
+	console.log(req.socket.localAddress);
 	if(id) {
 		db.get(`SELECT * FROM shortUrls WHERE shortId = "${id}"`, function (err,val) {
 			if(val) res.redirect(val.redirectUrl)
