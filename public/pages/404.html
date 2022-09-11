@@ -31,9 +31,20 @@
 			background-size: 400% 100%;
 			font-size: 25rem;
 		}
+		p {
+			font-size: 2rem;
+			margin-left: 300px;
+			margin-top: 630px;
+			text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+		}
 		@keyframes rainbowshift {
-			0%, 100% {background-position: 0 0;}
-			50% {background-position: 100% 0;}
+			0%, 100% {
+				background-position: 0 0;
+			}
+			50% {
+				filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5)) drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+				background-position: 100% 0;
+			}
 		}
 		.glow img {
 			height: 1200px;
@@ -41,12 +52,21 @@
 			opacity: 0.25;
 			padding: 200px;
 			position: absolute;
+			animation: glowfilter 3s ease-in-out infinite;
+			z-index: -1;
+		}
+		@keyframes glowfilter {
+			0%, 100% {
+				top: 20px;
+			}
+			50% {
+				top: 0px;
+			}
 		}
 		a.home {
 			display: block;
-			margin: 300px 400px;
 			position: absolute;
-			font-size: 2rem;
+			font-size: 1.6rem;
 			color: #fff;
 			text-decoration: none!important;
 			z-index: 10!important;
@@ -55,9 +75,44 @@
 		a.home:hover {
 			color: #ff3399;
 		}
+		.balloon img.this {
+			width: 100px;
+			position: relative;
+			filter: hue-rotate(180deg);
+			animation: balloonfloat 3s ease-in-out infinite;
+		}
+		.balloon .cloud {
+			position: absolute;
+			scale: 0.75;
+			top: 50px;
+			filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5)) drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+			animation: glowfilter 2s ease-in-out infinite;
+		}
+		.balloon {
+			width: 100px;
+			display: flex;
+			position: absolute;
+			justify-content: center;
+			align-items: center;
+		}
+		@keyframes balloonfloat {
+			0%, 100% {
+				top: 20px;
+			}
+			50% {
+				top: 0px;
+			}
+		}
 	</style>
 	<h1>404</h1>
+	<p>
+		{{ LINK }} was not found.
+	</p>
 	<div class="glow"><img src="../svg/cloud.svg" alt=""></div>
-	<a href="../" class="home">Home</a>
+	<div class="balloon" style="top: 300px; left: 1200px">
+		<img src="../svg/balloon.svg" alt="" class="this">
+		<img src="../svg/cloud.svg" alt="" class="cloud">
+		<a href="../" class="home">Home</a>
+	</div>
 </body>
 </html>

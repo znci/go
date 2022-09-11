@@ -6,10 +6,6 @@
 		LICENSE.md
 */
 
-var __main__ = {};
-
-__main__.version = 1
-
 const express = require("express"),
 	  http = require("http"),
 	  path = require("path"),
@@ -25,6 +21,12 @@ const express = require("express"),
 
 	  SERVERPORT = 25565; // Change to whatever
 
+var __main__ = {};
+
+__main__.version = 1
+__main__.admin_cookie = CryptoJS.AES.encrypt(`username:${process.env.ADMIN_USER},password:${CryptoJS.SHA512(process.env.ADMIN_PASSWORD)}}`, "Lorem Ipsum Dolor Sit Amet").toString()
+
+require("dotenv").config()
 
 db.serialize(() => {
 	db.run("CREATE TABLE IF NOT EXISTS shortUrls (shortId TEXT, redirectUrl TEXT, time INT)")
@@ -37,7 +39,16 @@ function insert(shortID, redirectUrl) {
 }
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname + "/public")));
+app.use(
+	express.static(path.join(__dirname + "/public")), async function(req, res, err) {
+		if(err) {
+			console.log("hi");
+			const page404 = fs.readFileSync(path.join(__dirname + "/public/pages/404.html"), "utf8");
+			page404.replace("{{ LINK }}", req.url)
+			res.status(404).send(page404)
+		}
+	}
+);
 app.use(cookieParser());
 
 function getCookieVal(query, str) {
@@ -61,7 +72,7 @@ app.get("/:id?", (req, res) => {
 				case "admin":
 					if(req.cookies["login-token"]) {
 						console.log(CryptoJS.AES.decrypt(req.cookies["login-token"], "Lorem Ipsum Dolor Sit Amet").toString(CryptoJS.enc.Utf8).replace(" ", ""));
-						if(CryptoJS.AES.decrypt(req.cookies["login-token"], "Lorem Ipsum Dolor Sit Amet").toString(CryptoJS.enc.Utf8)) {
+						if(req.cookies["login-token"] === __main__.admin_cookie) {
 							res.sendFile(__dirname + "/admin/authenticated.html")
 						}
 				 	} else {
@@ -79,8 +90,9 @@ app.post("/api/create", (req, res) => {
 		res.status(201);
 	} else {
 		res.status(400).send(`
-			Please make sure your links start with <code>http://</code>. You gave us: <code>${redirectURL}</code>
+			Please make sure your links start with <code>http://</code> or <code>https://</code>. You gave us: <code>${redirectURL}</code>
 		`);
+		return
 	}
 	db.run(`SELECT shortId FROM shortUrls WHERE shortId = ${randomId}`, (err) => {
 		if(err) {
@@ -93,7 +105,7 @@ app.post("/api/create", (req, res) => {
 app.post("/api/tryAdmin", (req, res) => {
 	const {username,password} = req.body
 	if(username === "root" && password === "rootrootroot") {
-		res.cookie("login-token", CryptoJS.AES.encrypt(`username:${username},password:${CryptoJS.SHA512(password)},logintime:${Date.now()}`, "Lorem Ipsum Dolor Sit Amet").toString())
+		res.cookie("login-token", CryptoJS.AES.encrypt(`username:${username},password:${CryptoJS.SHA512(password)}`, "Lorem Ipsum Dolor Sit Amet").toString())
 		res.status(200).send("200")
 	} else {
 		res.status(400).send("400")
@@ -106,6 +118,12 @@ app.get("/api/getAllLinks", (req, res) => {
 		}
 	})
 })
+app.get("/api/logout", (req, res) => {
+	res.clearCookie("login-token")	
+	res.send("Logged out. Redirecting...")
+	res.redirect("/")
+})
+
 server.listen(SERVERPORT, () => {
     console.log('a')
 	console.log(`——————————znci—————————`);
@@ -113,4 +131,3 @@ server.listen(SERVERPORT, () => {
 	console.log(`API Listening`);
 	console.log(`———————————go——————————`);
 })
- 

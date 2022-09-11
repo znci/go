@@ -23,3 +23,4 @@
  - shortid - generating random id because we're lazy
  - crypto-js - encryption
  - cookie-parser - cookie management for backend frontend communication auth
+ - dotenv - <<<<<<
