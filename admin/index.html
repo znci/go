@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Admin Panel :: Go</title>
+	<link rel="stylesheet" href="../css/index.css">
+	<script src="https://kit.fontawesome.com/cc60436b68.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.6.2/fetch.min.js" integrity="sha512-1Gn7//DzfuF67BGkg97Oc6jPN6hqxuZXnaTpC9P5uw8C6W4yUNj5hoS/APga4g1nO2X6USBb/rXtGzADdaVDeA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+	<iframe src="../header.html" frameborder="0" width="100%" height="63px"></iframe>
+	<div class="hint"></div>
+	<input type="text" id="username" required>
+	<input type="password" id="password" required>
+	<input type="submit" id="submit">
+</body>
+	<script>
+		document.querySelector("#submit").addEventListener("click", async () => {
+			const res = await fetch("/api/tryAdmin", {
+				method: 'POST',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(
+					{
+						username: document.getElementById("username").value,
+						password: document.getElementById("password").value
+					}
+				)
+			})
+			if(res.status === 400) {
+				document.querySelector(".hint").innerHTML = `
+					<div class="hint">
+						<span style="color: red">
+							<i class="fa-solid fa-triangle-exclamation"></i>
+							Error
+						</span>
+						Password or Username Incorrect
+					</div>
+				`
+				setTimeout(() => {
+					document.querySelector(".hint").innerHTML = ""
+				}, 3000);
+			}
+			if(res.status === 200) {
+				document.querySelector(".hint").innerHTML = `
+					<div class="hint">
+						<span style="color: lime">
+							<i class="fa-solid fa-check"></i>
+							Success
+						</span>
+						Redirecting...
+					</div>
+				`
+				document.location = document.location
+				setTimeout(() => {
+					document.querySelector(".hint").innerHTML = ""
+				}, 3000);
+			}
+		})
+	</script>
+</html>

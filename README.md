@@ -2,6 +2,9 @@
 	<img src="https://raw.githubusercontent.com/znci/go/main/logo.png" alt="Go - Short URLs">
 </div>
 
+### Help
+ - We know Short URLs shouldn't be this difficult but I am losing my mind
+
 ### Developer Setup
 > **Note**
 > Developer Setup does not work yet!
@@ -18,3 +21,5 @@
  - body-parser - managing post requests for api
  - sqlite3 - local database (WILL BE REMOVED IN DEVSETUP LATER)
  - shortid - generating random id because we're lazy
+ - crypto-js - encryption
+ - cookie-parser - cookie management for backend frontend communication auth

@@ -1,5 +1,4 @@
-@import url(https://fonts.bunny.net/css?family=manrope:200,300,400,500,600,700,800);
-
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;800&display=swap');
 * {
 	padding: 0;
 	margin: 0;
@@ -8,5 +7,102 @@
 }
 html {
 	background-color: #1e1e1e;
+	font-family: "JetBrains Mono", sans-serif;
+	color: #fff;
+}
+a {
+	color: currentColor;
+	text-decoration: none;
+	transition: color 0.3s linear;
+}
+a:hover {
+	color: #F74C4CFF;
+}
+li {
+	list-style: none;
+}
+.slab::before {
+	content: ' ';
+	display: block;
+	width: 18px;
+	transform: skewX(-25deg);
+	background-color: #fff;
+	height: 18px;
+}
+.navbar {
+	padding: 10px;
+	background-color: #121212;
+	display: flex;
+	justify-content: center;
+	color: #fff;
+	font-size: 1.5rem;
+	align-items: center;
+	font-family: "JetBrains Mono", sans-serif;
+	box-shadow: #12121260 10px 10px;
+}
+.navbar .title {
+	font-family: "JetBrains Mono", sans-serif;
+	font-size: 2rem;
+}
+.navbar .items {
+	display: flex;
+}
+.navbar .items li {
+	margin: 0px 10px 0px 10px;
+}
+input {
+	background-color: transparent;
+	border: 1px solid #fff;
+	outline: navajowhite;
+	color: #fff;
+	font-family: "JetBrains Mono", sans-serif;
+	font-size: 1rem;
+	padding: 10px;
+	border-radius: 10px;
+}
+
+.tooltip .content {
+	position: absolute;
+	font-size: 14px;
+	max-height: fit-content;
+	height: fit-content;
+	background-color: #121212;
+	border: 1px #1e1e1e solid;
+	z-index: 10000;
+	padding: 5px;
+	border-radius: 5px;
+	visibility: hidden;
+	opacity: 0;
+	max-width: 500px;
+	transition: opacity 0.3s;
+}
+.tooltip:hover .content, .tooltip .content:hover {
+	visibility: inherit;
+	opacity: 1;
+	display: block;
+}
+.ctx-menu {
+	position: fixed;
+	z-index: 10000;
+	width: 150px;
+	max-height:max-content;
+	background-color: #1b1a1a;
+	border-radius: 5px;
+	display: none;
+	overflow: hidden;
+	transition: height 0.3s linear;
+}
+.ctx-menu.visible {
+	display: block;
+}
+.ctx-menu .item {
+	padding: 8px 10px;
+	font-size: 15px;
+	color: #eee;
+	cursor: pointer;
+	border-radius: inherit;
+}
+.ctx-menu .item:hover {
+	background: #343434;
 	color: #fff;
 }
