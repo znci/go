@@ -15,6 +15,7 @@
  - Ensure firebase authentication works
 
 ### Modules Required
+ - LIST: express http path body-parser sqlite3 shortid dotenv crypto-js cookie-parser
  - express - webserver
  - http - webserver
  - path - easier file locating
