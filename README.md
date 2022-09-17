@@ -1,5 +1,5 @@
 <div align="center">
-	<img src="https://raw.githubusercontent.com/znci/go/main/logo.png" alt="Go - Short URLs">
+	<img src="https://raw.githubusercontent.com/znci/go/main/icons/logo.svg" alt="Go - Short URLs">
 </div>
 
 ### Help
