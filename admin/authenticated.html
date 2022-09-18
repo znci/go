@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Admin Panel :: Go</title>
 	<link rel="stylesheet" href="../css/index.css">
+	<link rel="stylesheet" href="../admin/index.css">
 	<script src="https://kit.fontawesome.com/cc60436b68.js" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.6.2/fetch.min.js" integrity="sha512-1Gn7//DzfuF67BGkg97Oc6jPN6hqxuZXnaTpC9P5uw8C6W4yUNj5hoS/APga4g1nO2X6USBb/rXtGzADdaVDeA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -21,7 +22,10 @@
 			</div>
 		</div>
 	</section>
-	<section class="recent-links"></section>
+	<section class="recent-links">
+		<button class="refresh-links" onclick="getAllLinks()">Refresh</button>
+		<div class="recent-links-container"></div>
+	</section>
 </body>
-	<script src="./js/recentLinks.js"></script>
+	<script src="../admin/recentLinks.js"></script>
 </html>

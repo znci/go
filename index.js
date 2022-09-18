@@ -30,6 +30,7 @@ require("dotenv").config()
 
 db.serialize(() => {
 	db.run("CREATE TABLE IF NOT EXISTS shortUrls (shortId TEXT, redirectUrl TEXT, time INT)")
+	db.run("CREATE TABLE IF NOT EXISTS admin (shortUrls TEXT)")
 }); 
 function insert(shortID, redirectUrl) {
 	db.run(`INSERT INTO shortUrls (shortId, redirectUrl, time) VALUES ("${shortID}", "${redirectUrl}", "${Date.now()}")`, (err) => {
@@ -39,16 +40,7 @@ function insert(shortID, redirectUrl) {
 }
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(
-	express.static(path.join(__dirname + "/public")), async function(req, res, err) {
-		if(err) {
-			console.log("hi");
-			const page404 = fs.readFileSync(path.join(__dirname + "/public/pages/404.html"), "utf8");
-			page404.replace("{{ LINK }}", req.url)
-			res.status(404).send(page404)
-		}
-	}
-);
+app.use(express.static(path.join(__dirname + "/public")));
 app.use(cookieParser());
 
 function getCookieVal(query, str) {
@@ -71,7 +63,7 @@ app.get("/:id?", (req, res) => {
 			switch(id) {
 				case "admin":
 					if(req.cookies["login-token"]) {
-						console.log(CryptoJS.AES.decrypt(req.cookies["login-token"], "Lorem Ipsum Dolor Sit Amet").toString(CryptoJS.enc.Utf8).replace(" ", ""));
+						console.log(req.cookies["login-token"] + " | " + __main__.admin_cookie + "----------------------------------------------");
 						if(req.cookies["login-token"] === __main__.admin_cookie) {
 							res.sendFile(__dirname + "/admin/authenticated.html")
 						}
@@ -104,19 +96,27 @@ app.post("/api/create", (req, res) => {
 })
 app.post("/api/tryAdmin", (req, res) => {
 	const {username,password} = req.body
-	if(username === "root" && password === "rootrootroot") {
-		res.cookie("login-token", CryptoJS.AES.encrypt(`username:${username},password:${CryptoJS.SHA512(password)}`, "Lorem Ipsum Dolor Sit Amet").toString())
+	if(username === process.env.ADMIN_USER && password === process.env.ADMIN_PASSWORD) {
+		res.cookie("login-token", __main__.admin_cookie)
 		res.status(200).send("200")
 	} else {
 		res.status(400).send("400")
 	}
 });
+let linkData = [];
+async function getLinkData(val) {
+	linkData.push(val)
+}
 app.get("/api/getAllLinks", (req, res) => {
+	linkData.length = 0;
 	db.each(`SELECT * FROM shortUrls`, (err, val) => {
 		if(!err) {
-			console.log(val);
+			getLinkData(val);
 		}
 	})
+	setTimeout(() => {
+		res.json(linkData)
+	}, 15);
 })
 app.get("/api/logout", (req, res) => {
 	res.clearCookie("login-token")	
