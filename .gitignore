@@ -5,3 +5,4 @@ ngrok.exe
 firebaseconfig.js
 firebase.json
 firebase-secrets.json
+serviceAccountKey.json

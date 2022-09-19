@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth__en.js"></script>
+	<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<title>Go :: URL Shortener</title>
+	<link rel="stylesheet" href="../css/index.css">
+	<script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-database.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js" defer></script>
+	<script src="https://kit.fontawesome.com/cc60436b68.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<script type="module">
+
+		// Import the functions you need from the SDKs you need
+	  
+		import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+	  
+		import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js";
+	  
+		// TODO: Add SDKs for Firebase products that you want to use
+	//   I KNOW AND IDFK WHY
+	// MY CODE IS DRIVING ME INSANE AND I GIVE UP WITH IT
+		// https://firebase.google.com/docs/web/setup#available-libraries
+	  
+	  
+		// Your web app's Firebase configuration
+	  
+		// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+	  
+		const firebaseConfig = {
+	  
+		  apiKey: "AIzaSyB1jPIrINo1a65VT6oXnZrNVE-BPlNSL3k",
+	  
+		  authDomain: "zncigo.firebaseapp.com",
+	  
+		  projectId: "zncigo",
+	  
+		  storageBucket: "zncigo.appspot.com",
+	  
+		  messagingSenderId: "554424137391",
+	  
+		  appId: "1:554424137391:web:48d910d97d0f3fb94d865a",
+	  
+		  measurementId: "G-Q8FX3152B4"
+	  
+		};
+	  
+	  
+		// Initialize Firebase
+	  
+		const app = initializeApp(firebaseConfig);
+	  
+		const analytics = getAnalytics(app);
+	  
+	  </script>
+	<section class="header">
+		<div class="navbar">
+			<div class="title">go</div>
+			<div class="items">
+				<li><a href="https://github.com/znci/go">source</a></li>
+				<li><a href="../api">api</a></li>
+				<li><a href="../login/">login</a></li>
+			</div>
+		</div>
+	</section>
+	<form action="/api/login" method="post">
+		<button type="submit">Create</button>
+	</form>
+</body> 
+	<script>
+		firebase.initializeApp(firebaseConfig); // restart express
+		// nvm yes it does
+		// ima testing hold on
+		
+		// its just the /login that doesnt work
+
+		firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
+	</script>
+	<script src="../js/index.js"></script>
+</html>sto
