@@ -68,9 +68,13 @@ app.get("/:id?", (req, res) => {
 							res.sendFile(__dirname + "/admin/authenticated.html")
 						}
 				 	} else {
-						res.sendFile(__dirname + "/admin/index.html")
+						res.status(200).sendFile(__dirname + "/admin/index.html")
 					}
 					break
+				case "login":
+					res.status(200).sendFile(__dirname + "/public/login.html");
+					break
+					// works sop lets reinstate other things yes
 			}
 		})
 	}
